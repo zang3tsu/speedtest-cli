@@ -389,12 +389,11 @@ def create_connection(address, timeout=_GLOBAL_DEFAULT_TIMEOUT,
             sock = socket.socket(af, socktype, proto)
             if timeout is not _GLOBAL_DEFAULT_TIMEOUT:
                 sock.settimeout(float(timeout))
+            print(source_address, interface)
             if source_address:
                 sock.bind(source_address)
             if interface:
-                # sock.setsockopt(socket.SOL_SOCKET, 25, interface)
-                sock.setsockopt(socket.SOL_SOCKET, socket.SO_BINDTODEVICE,
-                                interface)
+                sock.setsockopt(socket.SOL_SOCKET, 25, interface)
 
             sock.connect(sa)
             return sock
