@@ -392,7 +392,9 @@ def create_connection(address, timeout=_GLOBAL_DEFAULT_TIMEOUT,
             if source_address:
                 sock.bind(source_address)
             if interface:
-                sock.setsockopt(socket.SOL_SOCKET, 25, interface)
+                # sock.setsockopt(socket.SOL_SOCKET, 25, interface)
+                sock.setsockopt(socket.SOL_SOCKET, socket.SO_BINDTODEVICE,
+                                interface)
 
             sock.connect(sa)
             return sock
